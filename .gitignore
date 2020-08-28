@@ -4,3 +4,4 @@
 /postgres/data
 .idea/
 .DS_Store
+redis/data
