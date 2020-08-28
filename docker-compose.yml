@@ -1,0 +1,108 @@
+version: '3'
+
+networks:
+  backend:
+
+services:
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - "8188:80"
+    volumes:
+      - ./src:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - php-7.3
+      - mysql
+    networks:
+      - backend
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    container_name: redis
+    volumes:
+      - ./redis/data:/var/lib/redis
+      - ./redis/conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:8.0.21
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql
+    restart: unless-stopped
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - "4306:3306"
+    environment:
+      MYSQL_USER: root
+      MYSQL_DATABASE: homestead
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      SERVICE_TAG: dev
+      SERVICE_NAME: mysql
+      TZ: ${WORKSPACE_TIMEZONE}
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:alpine
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    ports:
+      - "54322:5432"
+    environment:
+      POSTGRES_DB: mif
+      POSTGRES_USER: incidents
+      POSTGRES_PASSWORD: secret
+    networks:
+        - backend
+    container_name: postgres
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/db:/data/db
+      - ./mongo/configdb:/data/configdb
+    networks:
+      - backend
+    container_name: mongo
+
+  php-7.3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_PHP_VERSION: '7.3'
+        DOCKER_PHP_ENABLE_XDEBUG: 'on'
+    working_dir: /var/www
+    container_name: php-7.3
+    volumes:
+      - ./php-7.3:/var/www
+    ports:
+      - "9003:9000"
+    networks:
+      - backend
+
+  php-7.1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_PHP_VERSION: '7.1'
+        DOCKER_PHP_ENABLE_XDEBUG: 'on'
+    working_dir: /var/www
+    container_name: php-7.1
+    volumes:
+      - ./php-7.1:/var/www
+    ports:
+      - "9001:9000"
+    networks:
+      - backend

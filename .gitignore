@@ -1,0 +1,6 @@
+/mongo/db
+/mysql/data
+/public/storage
+/postgres/data
+.idea/
+.DS_Store
