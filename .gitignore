@@ -3,5 +3,7 @@
 /postgres/data
 /redis/data
 /nginx/logs
+/projects/php-7.1/smart.aide.ru
+/projects/php-7.3/smart-system.aide.ru
 .idea/
 .DS_Store
