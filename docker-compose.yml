@@ -82,10 +82,12 @@ services:
       args:
         DOCKER_PHP_VERSION: '7.3'
         DOCKER_PHP_ENABLE_XDEBUG: 'on'
+        TZ: ${WORKSPACE_TIMEZONE}
     working_dir: /var/www
     container_name: php-7.3
     volumes:
       - ./php-7.3:/var/www
+      - ./php-ini/7.3/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "9003:9000"
     networks:
@@ -98,10 +100,12 @@ services:
       args:
         DOCKER_PHP_VERSION: '7.1'
         DOCKER_PHP_ENABLE_XDEBUG: 'on'
+        TZ: ${WORKSPACE_TIMEZONE}
     working_dir: /var/www
     container_name: php-7.1
     volumes:
       - ./php-7.1:/var/www
+      - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "9001:9000"
     networks:

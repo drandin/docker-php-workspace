@@ -1,7 +1,9 @@
 ARG DOCKER_PHP_VERSION
-ARG DOCKER_PHP_ENABLE_XDEBUG
 
 FROM php:${DOCKER_PHP_VERSION}-fpm-alpine
+
+ARG DOCKER_PHP_ENABLE_XDEBUG
+ARG TZ
 
 # Install dependancies
 RUN apk update && \
@@ -16,7 +18,14 @@ RUN apk update && \
         imagemagick \
         patch \
         zsh \
-        bash
+        bash \
+        htop
+
+# https://wiki.alpinelinux.org/wiki/Setting_the_timezone
+RUN echo "${TZ}" && apk --update add tzdata && \
+    cp /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone && \
+    apk del tzdata
 
 # Install build dependencies
 RUN apk add --update --no-cache --virtual .docker-php-global-dependencies acl \
@@ -69,9 +78,7 @@ RUN php -m && \
     docker-php-ext-configure pcntl --enable-pcntl && \
     docker-php-ext-configure soap && \
     docker-php-ext-configure zip --enable-zip --with-libzip && \
-    docker-php-ext-install dom \
-        exif \
-        iconv \
+    docker-php-ext-install exif \
         mysqli \
         opcache \
         xsl \
