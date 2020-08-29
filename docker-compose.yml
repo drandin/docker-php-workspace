@@ -60,6 +60,7 @@ services:
       POSTGRES_DB: mif
       POSTGRES_USER: incidents
       POSTGRES_PASSWORD: secret
+      TZ: ${WORKSPACE_TIMEZONE}
     networks:
         - backend
     container_name: postgres
@@ -71,6 +72,8 @@ services:
     volumes:
       - ./mongo/db:/data/db
       - ./mongo/configdb:/data/configdb
+    environment:
+      TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
     container_name: mongo
