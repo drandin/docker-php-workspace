@@ -10,6 +10,7 @@ services:
     ports:
       - "8188:80"
     volumes:
+      - ./projects:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx/
     depends_on:
@@ -19,6 +20,7 @@ services:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
+
   redis:
     image: redis:latest
     ports:
@@ -87,7 +89,7 @@ services:
     working_dir: /var/www
     container_name: php-7.3
     volumes:
-      - ./projects-php-7.3:/var/www
+      - ./projects:/var/www
       - ./php-ini/7.3/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "9003:9000"
@@ -104,9 +106,9 @@ services:
     working_dir: /var/www
     container_name: php-7.1
     volumes:
-      - ./projects-php-7.1:/var/www
+      - ./projects:/var/www
       - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
     ports:
-      - "9001:9000"
+      - "9000:9000"
     networks:
       - backend

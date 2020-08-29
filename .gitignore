@@ -1,6 +1,5 @@
 /mongo/db
 /mysql/data
-/public/storage
 /postgres/data
 /redis/data
 /nginx/logs
