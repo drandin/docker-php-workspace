@@ -8,14 +8,18 @@ services:
     image: nginx:stable-alpine
     container_name: nginx
     ports:
-      - "8188:80"
+      - "80:80"
     volumes:
       - ./projects:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx/
     depends_on:
+      - php-7.1
       - php-7.3
       - mysql
+      - redis
+      - mongo
+      - postgres
     environment:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
@@ -109,6 +113,6 @@ services:
       - ./projects:/var/www
       - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
     ports:
-      - "9000:9000"
+      - "9001:9000"
     networks:
       - backend
