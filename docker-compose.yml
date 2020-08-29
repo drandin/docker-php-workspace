@@ -16,6 +16,8 @@ services:
     depends_on:
       - php-7.3
       - mysql
+    environment:
+      TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
 
@@ -27,6 +29,8 @@ services:
     volumes:
       - ./redis/data:/var/lib/redis
       - ./redis/conf:/usr/local/etc/redis/redis.conf
+    environment:
+      TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
 

@@ -5,30 +5,26 @@ FROM php:${DOCKER_PHP_VERSION}-fpm-alpine
 ARG DOCKER_PHP_ENABLE_XDEBUG
 ARG TZ
 
-# Install dependancies
-RUN apk update && \
-    apk add --update --no-cache \
-        # Dependency for intl \
-        icu-libs \
-        libintl \
-        # Dependency for zip \
-        libzip \
-        # Misc tools \
-        git \
-        imagemagick \
-        patch \
-        zsh \
-        bash \
-        htop
-
 # https://wiki.alpinelinux.org/wiki/Setting_the_timezone
 RUN echo "${TZ}" && apk --update add tzdata && \
     cp /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone && \
     apk del tzdata
 
-# Install build dependencies
-RUN apk add --update --no-cache --virtual .docker-php-global-dependencies acl \
+RUN apk add --update --no-cache icu-libs \
+        libintl \
+        build-base \
+        zlib-dev \
+        cyrus-sasl-dev \
+        libgsasl-dev \
+        oniguruma-dev \
+        procps \
+        imagemagick \
+        patch \
+        zsh \
+        bash \
+        htop \
+        acl \
         apk-cron \
         augeas-dev \
         autoconf \
@@ -39,7 +35,7 @@ RUN apk add --update --no-cache --virtual .docker-php-global-dependencies acl \
         gomplate \
         git \
         gcc \
-        gettext-dev \
+        #gettext-dev \
         icu-dev \
         libcurl \
         libffi-dev \
@@ -72,7 +68,7 @@ RUN php -m && \
       --with-freetype-dir=/usr/include/ \
       --with-jpeg-dir=/usr/include/ \
       --with-png-dir=/usr/include/ && \
-    docker-php-ext-configure gettext && \
+    #docker-php-ext-configure gettext && \
     docker-php-ext-configure intl --enable-intl && \
     docker-php-ext-configure opcache --enable-opcache && \
     docker-php-ext-configure pcntl --enable-pcntl && \
@@ -84,7 +80,7 @@ RUN php -m && \
         xsl \
         bcmath \
         gd \
-        gettext \
+        #gettext \
         intl \
         opcache \
         pcntl \
@@ -122,5 +118,5 @@ RUN if [ "${DOCKER_PHP_ENABLE_XDEBUG}" == "on" ]; then \
     fi
 
 # Clean
-RUN apk del .docker-php-global-dependencies && rm -rf /var/cache/apk/* && docker-php-source delete
+RUN rm -rf /var/cache/apk/* && docker-php-source delete
 
