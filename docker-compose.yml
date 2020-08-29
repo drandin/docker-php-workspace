@@ -4,14 +4,12 @@ networks:
   backend:
 
 services:
-
   nginx:
     image: nginx:stable-alpine
     container_name: nginx
     ports:
       - "8188:80"
     volumes:
-      - ./src:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - php-7.3
@@ -20,7 +18,6 @@ services:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
-
   redis:
     image: redis:latest
     ports:
@@ -33,7 +30,6 @@ services:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
-
   mysql:
     image: mysql:8.0.21
     command: --default-authentication-plugin=mysql_native_password
@@ -53,7 +49,6 @@ services:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
-
   postgres:
     image: postgres:alpine
     volumes:
@@ -68,7 +63,6 @@ services:
     networks:
         - backend
     container_name: postgres
-
   mongo:
     image: mongo:latest
     ports:
@@ -81,7 +75,6 @@ services:
     networks:
       - backend
     container_name: mongo
-
   php-7.3:
     build:
       context: .
@@ -99,7 +92,6 @@ services:
       - "9003:9000"
     networks:
       - backend
-
   php-7.1:
     build:
       context: .

@@ -2,6 +2,6 @@
 /mysql/data
 /public/storage
 /postgres/data
+/redis/data
 .idea/
 .DS_Store
-redis/data
