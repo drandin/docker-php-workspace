@@ -11,6 +11,7 @@ services:
       - "8188:80"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx/
     depends_on:
       - php-7.3
       - mysql
@@ -86,7 +87,7 @@ services:
     working_dir: /var/www
     container_name: php-7.3
     volumes:
-      - ./php-7.3:/var/www
+      - ./projects-php-7.3:/var/www
       - ./php-ini/7.3/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "9003:9000"
@@ -103,7 +104,7 @@ services:
     working_dir: /var/www
     container_name: php-7.1
     volumes:
-      - ./php-7.1:/var/www
+      - ./projects-php-7.1:/var/www
       - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
     ports:
       - "9001:9000"

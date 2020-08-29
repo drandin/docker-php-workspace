@@ -3,5 +3,6 @@
 /public/storage
 /postgres/data
 /redis/data
+/nginx/logs
 .idea/
 .DS_Store
