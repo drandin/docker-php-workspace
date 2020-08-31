@@ -39,7 +39,7 @@ services:
       - backend
   mysql:
     image: mysql:8.0.21
-    command: --default-authentication-plugin=mysql_native_password #--sql-mode=""
+    command: --default-authentication-plugin=mysql_native_password --skip_name_resolve
     container_name: mysql
     restart: unless-stopped
     volumes:
@@ -47,6 +47,8 @@ services:
       - ./mysql/conf.d:/etc/mysql/conf.d
     ports:
       - "4306:3306"
+    security_opt:
+      - seccomp:unconfined
     environment:
       MYSQL_USER: root
       MYSQL_DATABASE: homestead

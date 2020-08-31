@@ -1,2 +1,2 @@
 [mysqld]
-sql_mode=
+sql_mode=""
