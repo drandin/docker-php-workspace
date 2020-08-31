@@ -120,3 +120,4 @@ RUN if [ "${DOCKER_PHP_ENABLE_XDEBUG}" == "on" ]; then \
 # Clean
 RUN rm -rf /var/cache/apk/* && docker-php-source delete
 
+USER www-data:www-data
