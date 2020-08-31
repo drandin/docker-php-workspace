@@ -37,6 +37,7 @@ services:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
+
   mysql:
     image: mysql:8.0.21
     command: --default-authentication-plugin=mysql_native_password --skip_name_resolve
@@ -45,6 +46,7 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/logs:/var/log/mysql/
     ports:
       - "4306:3306"
     security_opt:
@@ -59,6 +61,7 @@ services:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
+
   postgres:
     image: postgres:alpine
     volumes:
@@ -73,6 +76,7 @@ services:
     networks:
         - backend
     container_name: postgres
+
   mongo:
     image: mongo:latest
     ports:
@@ -85,6 +89,7 @@ services:
     networks:
       - backend
     container_name: mongo
+
   php-7.3:
     build:
       context: .
@@ -98,10 +103,12 @@ services:
     volumes:
       - ./projects:/var/www
       - ./php-ini/7.3/php.ini:/usr/local/etc/php/php.ini
+      - ./php-workers/7.3/supervisor.d:/etc/supervisor.d
     ports:
       - "9003:9000"
     networks:
       - backend
+
   php-7.1:
     build:
       context: .
@@ -115,6 +122,7 @@ services:
     volumes:
       - ./projects:/var/www
       - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
+      - ./php-workers/7.1/supervisor.d:/etc/supervisor.d
     ports:
       - "9001:9000"
     networks:

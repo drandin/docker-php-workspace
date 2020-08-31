@@ -35,7 +35,7 @@ RUN apk add --update --no-cache icu-libs \
         gomplate \
         git \
         gcc \
-        #gettext-dev \
+        gettext-dev \
         icu-dev \
         libcurl \
         libffi-dev \
@@ -68,7 +68,7 @@ RUN php -m && \
       --with-freetype-dir=/usr/include/ \
       --with-jpeg-dir=/usr/include/ \
       --with-png-dir=/usr/include/ && \
-    #docker-php-ext-configure gettext && \
+    docker-php-ext-configure gettext && \
     docker-php-ext-configure intl --enable-intl && \
     docker-php-ext-configure opcache --enable-opcache && \
     docker-php-ext-configure pcntl --enable-pcntl && \
@@ -80,7 +80,7 @@ RUN php -m && \
         xsl \
         bcmath \
         gd \
-        #gettext \
+        gettext \
         intl \
         opcache \
         pcntl \
