@@ -3,6 +3,7 @@
 /postgres/data
 /redis/data
 /nginx/logs
+/mongo-webui
 /projects/smart.aide.ru
 /projects/smart-system.aide.ru
 .idea/

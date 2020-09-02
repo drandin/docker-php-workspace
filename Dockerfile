@@ -59,7 +59,9 @@ RUN apk add --update --no-cache icu-libs \
         sqlite-dev \
         supervisor \
         su-exec \
-        wget
+        wget \
+        nodejs \
+        npm
 
 #  Install php extensions
 RUN php -m && \
