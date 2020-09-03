@@ -134,3 +134,13 @@ Time                 Id Command    Argument
 /usr/sbin/mysqld, Version: 8.0.21 (MySQL Community Server - GPL). started with:
 Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
 Time                 Id Command    Argument
+# Time: 2020-09-03T15:09:58.602371Z
+# User@Host: root[root] @  [172.18.0.1]  Id:     8
+# Query_time: 0.463153  Lock_time: 0.113624 Rows_sent: 599  Rows_examined: 599
+SET timestamp=1599145798;
+SHOW VARIABLES;
+# Time: 2020-09-03T15:09:58.772013Z
+# User@Host: root[root] @  [172.18.0.1]  Id:     8
+# Query_time: 0.122285  Lock_time: 0.016746 Rows_sent: 5  Rows_examined: 21
+SET timestamp=1599145798;
+SHOW DATABASES;
