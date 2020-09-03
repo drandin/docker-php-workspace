@@ -54,9 +54,9 @@ services:
       - seccomp:unconfined
     environment:
       MYSQL_USER: root
+      MYSQL_PASSWORD: secret
       MYSQL_DATABASE: homestead
       MYSQL_ROOT_PASSWORD: secret
-      MYSQL_PASSWORD: secret
       SERVICE_TAG: dev
       SERVICE_NAME: mysql
       TZ: ${WORKSPACE_TIMEZONE}
@@ -93,11 +93,11 @@ services:
 
   php-7.3:
     build:
-      context: .
+      context: ./php-workspace
       dockerfile: Dockerfile
       args:
         DOCKER_PHP_VERSION: '7.3'
-        DOCKER_PHP_ENABLE_XDEBUG: 'on'
+        DOCKER_PHP_ENABLE_XDEBUG: ${DOCKER_PHP_ENABLE_XDEBUG}
         TZ: ${WORKSPACE_TIMEZONE}
     working_dir: /var/www
     container_name: php-7.3
@@ -112,11 +112,11 @@ services:
 
   php-7.1:
     build:
-      context: .
+      context: ./php-workspace
       dockerfile: Dockerfile
       args:
         DOCKER_PHP_VERSION: '7.1'
-        DOCKER_PHP_ENABLE_XDEBUG: 'on'
+        DOCKER_PHP_ENABLE_XDEBUG: ${DOCKER_PHP_ENABLE_XDEBUG}
         TZ: ${WORKSPACE_TIMEZONE}
     working_dir: /var/www
     container_name: php-7.1

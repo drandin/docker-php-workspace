@@ -2,8 +2,8 @@ ARG DOCKER_PHP_VERSION
 
 FROM php:${DOCKER_PHP_VERSION}-fpm-alpine
 
-ARG DOCKER_PHP_ENABLE_XDEBUG
-ARG TZ
+ARG DOCKER_PHP_ENABLE_XDEBUG='off'
+ARG TZ='UTC'
 
 # https://wiki.alpinelinux.org/wiki/Setting_the_timezone
 RUN echo "${TZ}" && apk --update add tzdata && \
