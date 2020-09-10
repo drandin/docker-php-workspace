@@ -1,5 +1,6 @@
 /mongo/db
-/mysql/data
+/mysql-8/data
+/mysql-5.7/data
 /mysql/logs
 /postgres/data
 /redis/data

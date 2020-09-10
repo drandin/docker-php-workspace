@@ -1,0 +1,10 @@
+[mysqld]
+skip-log-bin
+
+# Off strict mode
+sql_mode=""
+
+# Slow query settings:
+slow_query_log=0
+slow_query_log_file=/var/log/mysql/slow.log
+long_query_time=10
