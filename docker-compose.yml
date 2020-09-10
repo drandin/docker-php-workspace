@@ -48,6 +48,7 @@ services:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf.d:/etc/mysql/conf.d
       - ./mysql/logs:/var/log/mysql/
+      - ./mysql/dump:/dump
     ports:
       - "4306:3306"
     security_opt:
