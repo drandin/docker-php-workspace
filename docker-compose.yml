@@ -50,7 +50,7 @@ services:
       - ./mysql-5.7/logs:/var/log/mysql/
       - ./mysql-5.7/dump:/dump
     ports:
-      - "4307:3306"
+      - "${MYSQL_5_7_PORT}:3306"
     security_opt:
       - seccomp:unconfined
     environment:
@@ -71,7 +71,7 @@ services:
       - ./mysql-8/logs:/var/log/mysql/
       - ./mysql-8/dump:/dump
     ports:
-      - "4308:3306"
+      - "${MYSQL_8_PORT}:3306"
     security_opt:
       - seccomp:unconfined
     environment:
@@ -86,7 +86,7 @@ services:
     volumes:
       - ./postgres/data:/var/lib/postgresql/data
     ports:
-      - "54322:5432"
+      - "${POSTGRES_PORT}:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -99,7 +99,7 @@ services:
   mongo:
     image: mongo:4.2
     ports:
-      - "27017:27017"
+      - "${MONGO_PORT}:27017"
     volumes:
       - ./mongo/db:/data/db
       - ./mongo/configdb:/data/configdb
@@ -125,7 +125,7 @@ services:
       - ./php-ini/7.3/php.ini:/usr/local/etc/php/php.ini
       - ./php-workers/7.3/supervisor.d:/etc/supervisor.d
     ports:
-      - "9003:9000"
+      - "${PHP_7_3_PORT}:9000"
     networks:
       - backend
 
@@ -144,6 +144,6 @@ services:
       - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
       - ./php-workers/7.1/supervisor.d:/etc/supervisor.d
     ports:
-      - "9001:9000"
+      - "${PHP_7_1_PORT}:9000"
     networks:
       - backend
