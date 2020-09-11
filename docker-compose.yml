@@ -17,7 +17,8 @@ services:
     depends_on:
       - php-7.1
       - php-7.3
-      - mysql
+      - mysql-8
+      - mysql-5.7
       - redis
       - mongo
       - postgres
@@ -39,18 +40,17 @@ services:
     networks:
       - backend
 
-  mysql:
-    image: mysql:8.0.21
-    command: --default-authentication-plugin=mysql_native_password --skip_name_resolve --innodb-doublewrite=OFF --innodb-fast-shutdown=0
-    container_name: mysql
+  mysql-5.7:
+    image: mysql:5.7
+    container_name: mysql-5.7
     restart: unless-stopped
     volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/conf.d:/etc/mysql/conf.d
-      - ./mysql/logs:/var/log/mysql/
-      - ./mysql/dump:/dump
+      - ./mysql-5.7/data:/var/lib/mysql
+      - ./mysql-5.7/conf.d:/etc/mysql/conf.d
+      - ./mysql-5.7/logs:/var/log/mysql/
+      - ./mysql-5.7/dump:/dump
     ports:
-      - "4306:3306"
+      - "4307:3306"
     security_opt:
       - seccomp:unconfined
     environment:
@@ -59,7 +59,32 @@ services:
       MYSQL_DATABASE: homestead
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAG: dev
-      SERVICE_NAME: mysql
+      SERVICE_NAME: mysql-5.7
+      TZ: ${WORKSPACE_TIMEZONE}
+    networks:
+      - backend
+
+  mysql-8:
+    image: mysql:8.0.21
+    command: --default-authentication-plugin=mysql_native_password --skip_name_resolve
+    container_name: mysql-8
+    restart: unless-stopped
+    volumes:
+      - ./mysql-8/data:/var/lib/mysql
+      - ./mysql-8/conf.d:/etc/mysql/conf.d
+      - ./mysql-8/logs:/var/log/mysql/
+      - ./mysql-8/dump:/dump
+    ports:
+      - "4308:3306"
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: homestead
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAG: dev
+      SERVICE_NAME: mysql-8
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
@@ -86,6 +111,7 @@ services:
     volumes:
       - ./mongo/db:/data/db
       - ./mongo/configdb:/data/configdb
+      - ./mongo/dump:/dump
     environment:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
