@@ -54,12 +54,8 @@ services:
     security_opt:
       - seccomp:unconfined
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DATABASE: homestead
-      MYSQL_ROOT_PASSWORD: secret
-      SERVICE_TAG: dev
-      SERVICE_NAME: mysql-5.7
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
@@ -79,12 +75,8 @@ services:
     security_opt:
       - seccomp:unconfined
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DATABASE: homestead
-      MYSQL_ROOT_PASSWORD: secret
-      SERVICE_TAG: dev
-      SERVICE_NAME: mysql-8
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
       - backend
@@ -96,9 +88,9 @@ services:
     ports:
       - "54322:5432"
     environment:
-      POSTGRES_DB: mif
-      POSTGRES_USER: incidents
-      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       TZ: ${WORKSPACE_TIMEZONE}
     networks:
         - backend
