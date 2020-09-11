@@ -111,6 +111,7 @@ services:
     volumes:
       - ./mongo/db:/data/db
       - ./mongo/configdb:/data/configdb
+      - ./mongo/dump:/dump
     environment:
       TZ: ${WORKSPACE_TIMEZONE}
     networks:

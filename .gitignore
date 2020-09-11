@@ -1,8 +1,12 @@
 /mongo/db
+/mongo/dump
 /mysql-8/data
 /mysql-5.7/data
+/mysql-8/dump
+/mysql-5.7/dump
 /mysql/logs
 /postgres/data
+/postgres/dump
 /redis/data
 /nginx/logs
 /mongo-webui
