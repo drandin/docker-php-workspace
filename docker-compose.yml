@@ -41,13 +41,14 @@ services:
 
   mysql:
     image: mysql:8.0.21
-    command: --default-authentication-plugin=mysql_native_password --skip_name_resolve
+    command: --default-authentication-plugin=mysql_native_password --skip_name_resolve --innodb-doublewrite=OFF --innodb-fast-shutdown=0
     container_name: mysql
     restart: unless-stopped
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/conf.d:/etc/mysql/conf.d
       - ./mysql/logs:/var/log/mysql/
+      - ./mysql/dump:/dump
     ports:
       - "4306:3306"
     security_opt:
