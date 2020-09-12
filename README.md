@@ -55,9 +55,13 @@ Percona XtraBackup — это утилита для горячего резер�
 ```shell script
  docker exec -it mongo sh
 ```
-Выполните следующую команду:
+Выполните следующую команду, чтобы развернуть дамп базы _**database_name**_:
  
 ```shell script
  mongorestore -d database_name /dump/databases/database_name
 ```
+
+# Создание SSH ключа
+
+    ssh-keygen -f ./projects/.ssh/id_rsa -t rsa -b 2048 -C "your-name@example.com"
 

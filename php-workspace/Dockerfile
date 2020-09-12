@@ -43,7 +43,6 @@ RUN apk add --update --no-cache icu-libs \
         libjpeg-turbo-dev \
         libpng-dev \
         libmcrypt-dev \
-        libpq \
         libressl-dev \
         libxslt-dev \
         libzip-dev \
@@ -88,6 +87,7 @@ RUN php -m && \
         pcntl \
         soap \
         zip \
+        calendar \
         pdo_mysql && \
     pecl install redis && \
     docker-php-ext-enable redis && \
@@ -121,5 +121,10 @@ RUN if [ "${DOCKER_PHP_ENABLE_XDEBUG}" == "on" ]; then \
 
 # Clean
 RUN rm -rf /var/cache/apk/* && docker-php-source delete
+
+USER root
+
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
 
 USER www-data:www-data

@@ -7,6 +7,8 @@
 /mysql/logs
 /postgres/data
 /postgres/dump
+/projects/.ssh/*
+/projects/.ssh/!.gitkeep
 /redis/data
 /nginx/logs
 /mongo-webui

@@ -121,6 +121,7 @@ services:
     working_dir: /var/www
     container_name: php-7.3
     volumes:
+      - ./.ssh:/home/www-data/.ssh
       - ./projects:/var/www
       - ./php-ini/7.3/php.ini:/usr/local/etc/php/php.ini
       - ./php-workers/7.3/supervisor.d:/etc/supervisor.d
@@ -140,6 +141,7 @@ services:
     working_dir: /var/www
     container_name: php-7.1
     volumes:
+      - ./projects/.ssh:/home/www-data/.ssh
       - ./projects:/var/www
       - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
       - ./php-workers/7.1/supervisor.d:/etc/supervisor.d
