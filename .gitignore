@@ -8,7 +8,7 @@
 /postgres/data
 /postgres/dump
 /.ssh/*
-/.ssh/!.gitkeep
+!/.ssh/.gitkeep
 /redis/data
 /nginx/logs
 /mongo-webui
