@@ -7,12 +7,16 @@
 /mysql/logs
 /postgres/data
 /postgres/dump
-/projects/.ssh/*
-/projects/.ssh/!.gitkeep
+/.ssh/*
+/.ssh/!.gitkeep
 /redis/data
 /nginx/logs
 /mongo-webui
+
+# Файлы web-проектов
 /projects/smart.aide.ru
 /projects/smart-system.aide.ru
+
+# Другие файлы
 .idea/
 .DS_Store

@@ -129,6 +129,8 @@ services:
       - "${PHP_7_3_PORT}:9000"
     networks:
       - backend
+    extra_hosts:
+      - 'smart-system.aide.localhost:192.168.65.2'
 
   php-7.1:
     build:
@@ -141,7 +143,7 @@ services:
     working_dir: /var/www
     container_name: php-7.1
     volumes:
-      - ./projects/.ssh:/home/www-data/.ssh
+      - ./.ssh:/home/www-data/.ssh
       - ./projects:/var/www
       - ./php-ini/7.1/php.ini:/usr/local/etc/php/php.ini
       - ./php-workers/7.1/supervisor.d:/etc/supervisor.d
@@ -149,3 +151,5 @@ services:
       - "${PHP_7_1_PORT}:9000"
     networks:
       - backend
+    extra_hosts:
+      - 'smart.aide.localhost:192.168.65.2'

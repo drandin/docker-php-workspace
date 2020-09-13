@@ -21,7 +21,6 @@ RUN apk add --update --no-cache icu-libs \
         procps \
         imagemagick \
         patch \
-        zsh \
         bash \
         htop \
         acl \
