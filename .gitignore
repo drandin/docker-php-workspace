@@ -1,3 +1,4 @@
+.env
 /mongo/db
 /mongo/dump
 /mysql-8/data
