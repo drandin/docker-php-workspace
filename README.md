@@ -571,7 +571,7 @@ docker exec -it php-7.3 bash
 composer install
 ```
 
-# Развертывание дампов MySQL, PostgreSQL и MongoDB
+# Развёртывание дампов MySQL, PostgreSQL и MongoDB
    
 Если для работы web-проектов требуются перенести данные в хранилища, то следуйте описанным ниже инструкциям.         
        
