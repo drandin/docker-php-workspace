@@ -1,18 +1,26 @@
 .env
 /mongo/db
+!/mongo/db/.gitkeep
 /mongo/dump
 /mysql-8/data
+!/mysql-8/data/.gitkeep
 /mysql-5.7/data
+!/mysql-5.7/data/.gitkeep
 /mysql-8/dump
+!/mysql-8/dump/.gitkeep
 /mysql-5.7/dump
+!/mysql-5.7/dump/.gitkeep
 /mysql/logs
 /postgres/data
+!/postgres/data/.gitkeep
 /postgres/dump
+!/postgres/dump/.gitkeep
 /.ssh/*
 !/.ssh/.gitkeep
 /redis/data
+!/redis/data/.gitkeep
 /nginx/logs
-/mongo-webui
+!/nginx/logs/.gitkeep
 
 # Файлы web-проектов
 /projects/smart.aide.ru
