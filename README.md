@@ -213,10 +213,10 @@ PHP_7_1_PORT=9001
 server {
     listen 80;
     index index.php index.html;
-    server_name smart.aide.localhost;
-    error_log /var/log/nginx/smart.aide.error.log;
-    access_log /var/log/nginx/smart.aide.access.log combined if=$loggable;
-    root /var/www/smart.aide.ru;
+    server_name project-1.localhost;
+    error_log /var/log/nginx/project-1.error.log;
+    access_log /var/log/nginx/project-1.access.log combined if=$loggable;
+    root /var/www/project-1.ru;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
@@ -236,10 +236,10 @@ server {
 server {
     listen 80;
     index index.php index.html;
-    server_name smart-system.aide.localhost;
-    error_log /var/log/nginx/smart-system.aide.error.log;
-    access_log /var/log/nginx/smart-system.aide.access.log combined if=$loggable;
-    root /var/www/smart-system.aide.ru/public;
+    server_name project-2.localhost;
+    error_log /var/log/nginx/project-2.error.log;
+    access_log /var/log/nginx/project-2.access.log combined if=$loggable;
+    root /var/www/project-2.ru;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
@@ -257,11 +257,11 @@ server {
 }
 ```
 
-В файле конфигурации описаны настройки для 2 web-проектов — **smart.aide.localhost** и **smart-system.aide.localhost**.
+В файле конфигурации описаны настройки для 2 web-проектов — **project-1.localhost** и **project-2.localhost**.
 
 Здесь следует обратить внимание на то, как производится перенаправление запросов к нужному docker-контейнеру.
 
-Например, для проекта **smart.aide.localhost** указано:
+Например, для проекта **project-1.localhost** указано:
 
 ```nginx
 fastcgi_pass php-7.3:9000;
@@ -325,8 +325,8 @@ fastcgi_pass php-7.3:9000;
 Каталог предназначен для хранения web-проектов.
 
 ```
-├── smart-system.aide.ru
-└── smart.aide.ru 
+├── project-1.ru
+└── project-2.ru 
 ```
 
 Содержимое каталога **projects** доступно из контейнеров **php-7.1** и **php-7.3**. 
@@ -372,7 +372,7 @@ fastcgi_pass php-7.3:9000;
 **1**. Выполните клонирование данного репозитория в любое место на вашем компьютере. 
 
 ```shell script
-git clone https://gitlab.aide.ru/aide-development/docker-php-workspace
+git clone https://github.com/drandin/docker-php-workspace
 ```
 
 Перейдите в директорию, в которую вы клонировали репозиторий. Все дальнейшие команды следует выполнять именно в этой директории.
@@ -416,11 +416,11 @@ cp .env-example .env
 
 В данном случае, мы исходим из того, что **Nginx**, запущенный в docker-контейнере, доступен по адресу **127.0.0.1** и web-сервер слушает порт **80**.
 
-Если ваши проекты называются _smart.aide.localhost_ и _smart-system.aide.localhost_, то добавьте такие строки:
+Если ваши проекты называются _project-1.localhost_ и _project-2.localhost_, то добавьте такие строки:
 
 ```
-127.0.0.1   smart.aide.localhost
-127.0.0.1   smart-system.aide.localhost
+127.0.0.1   project-1.localhost
+127.0.0.1   project-2.localhost
 ```
 
 Не рекомендуем использовать имя хоста с **.dev** на конце в среде разработки. Лучшей практикой является применение других названий —  **.localhost** или **.test**.
@@ -480,15 +480,15 @@ PING docker.for.mac.localhost (192.168.65.2): 56 data bytes
   . 
 ```
 
-или, если ваши проекты называются **smart-system.aide.localhost** и **smart.aide.localhost**:  
+или, если ваши проекты называются **project-1.localhost** и **project-2.localhost**:  
 
 ```
  ...  
   php-7.1:  
   ...
     extra_hosts:
-      - 'smart-system.aide.localhost:192.168.65.2'
-      - 'smart.aide.localhost:192.168.65.2'
+      - 'project-1.localhost:192.168.65.2'
+      - 'project-2.localhost:192.168.65.2'
   ...
 ```  
 
