@@ -324,9 +324,14 @@ fastcgi_pass php-7.3:9000;
 
 Каталог предназначен для хранения web-проектов.
 
+Вы можете создать в это каталоге папки, и поместить в них ваши web-проекты.
+
+Например:
+
 ```
-├── project-1.ru
-└── project-2.ru 
+project-1.ru
+project-2.ru 
+...
 ```
 
 Содержимое каталога **projects** доступно из контейнеров **php-7.1** и **php-7.3**. 
@@ -393,6 +398,15 @@ cp .env-example .env
 
 <br>
 
+Для примера, далее мы будем исходить из предположения, что у вас есть 2 проекта:
+
+```
+project-1.ru
+project-2.ru
+```
+
+**project-1.ru** — будет работать на версии PHP 7.3, а **project-1.ru** - на PHP 7.1.
+
 **4**. Отредактируйте настройки виртуальных хостов **Nginx**.
 
 Файл конфигурации виртуальных хостов находится в каталоге **./nginx/conf.d/**.
@@ -410,8 +424,8 @@ cp .env-example .env
 Строки, которые вы добавляете в этот файл, будут выглядеть примерно так:
 
 ```
-127.0.0.1   web-project-1.localhost
-127.0.0.1   web-project-2.localhost
+127.0.0.1   project-1.localhost
+127.0.0.1   project-2.localhost
 ```
 
 В данном случае, мы исходим из того, что **Nginx**, запущенный в docker-контейнере, доступен по адресу **127.0.0.1** и web-сервер слушает порт **80**.
@@ -444,8 +458,8 @@ Web-проекты должны иметь возможность отправл
   php-7.1:  
   ...
     extra_hosts:
-      - 'web-project-1.localhost:IP_HOST_MACHINE'
-      - 'web-project-2.localhost:IP_HOST_MACHINE'
+      - 'project-1.localhost:IP_HOST_MACHINE'
+      - 'project-2.localhost:IP_HOST_MACHINE'
   ...
 ```
 
@@ -475,8 +489,8 @@ PING docker.for.mac.localhost (192.168.65.2): 56 data bytes
   php-7.1:  
   ...
     extra_hosts:
-      - 'web-project-1.localhost:192.168.65.2'
-      - 'web-project-2.localhost:192.168.65.2'
+      - 'project-1.localhost:192.168.65.2'
+      - 'project-2.localhost:192.168.65.2'
   . 
 ```
 
