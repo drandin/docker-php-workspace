@@ -487,18 +487,6 @@ PING docker.for.mac.localhost (192.168.65.2): 56 data bytes
   . 
 ```
 
-или, если ваши проекты называются **project-1.localhost** и **project-2.localhost**:  
-
-```
- ...  
-  php-7.1:  
-  ...
-    extra_hosts:
-      - 'project-1.localhost:192.168.65.2'
-      - 'project-2.localhost:192.168.65.2'
-  ...
-```  
-
 <br>
 
 **8**. Настройте параметры соединения с системами хранения данных.
