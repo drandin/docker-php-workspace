@@ -727,7 +727,7 @@ MySQL выдаст справедливое предупреждение:
 
 Percona **XtraBackup** — это утилита для горячего резервного копирования баз данных MySQL.
 
-О том, как работать с **XtraBackup** можно узнать по ссылке: https://medium.com/@drandin/создание-резервной-копии-mysql-при-помощи-утилиты-xtrabackup-26bd3f843075 
+О том, как работать с **XtraBackup** можно узнать по ссылке: https://vc.ru/dev/158815-sozdanie-rezervnoy-kopii-mysql-pri-pomoshchi-utility-xtrabackup. 
 
 ### Как развернуть дамп MongoDB?
 
