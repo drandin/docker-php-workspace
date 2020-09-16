@@ -23,8 +23,9 @@
 !/nginx/logs/.gitkeep
 
 # Файлы web-проектов
-/projects/*/**
-!/projects/*/.gitkeep
+/projects/**
+!/projects/project-1.ru/.gitkeep
+!/projects/project-2.ru/.gitkeep
 
 # Другие файлы
 .idea/
