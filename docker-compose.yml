@@ -130,7 +130,8 @@ services:
     networks:
       - backend
     extra_hosts:
-      - 'smart-system.aide.localhost:192.168.65.2'
+      - 'project-1.localhost:192.168.65.2'
+      - 'project-2.localhost:192.168.65.2'
 
   php-7.1:
     build:
@@ -152,4 +153,5 @@ services:
     networks:
       - backend
     extra_hosts:
-      - 'smart.aide.localhost:192.168.65.2'
+      - 'project-1.localhost:192.168.65.2'
+      - 'project-2.localhost:192.168.65.2'
