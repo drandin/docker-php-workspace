@@ -24,6 +24,7 @@
 
 # Файлы web-проектов
 /projects/**
+!/projects/.gitkeep
 !/projects/project-1.ru/.gitkeep
 !/projects/project-2.ru/.gitkeep
 
