@@ -17,7 +17,7 @@
 
 ## Возможности и особенности
 
-- Несколько версий **PHP** — **7.3** и **7.1** с набором наиболее востребованных расширений. 
+- Несколько версий **PHP** — **7.3**, **7.1** и **8.0** с набором наиболее востребованных расширений. 
 - Возможность использовать для web-проектов разные версии **PHP**.
 - Готовый к работе монитор процессов **Supervisor**.
 - Предварительно сконфигурированный веб-сервер **Nginx**.
@@ -52,7 +52,8 @@
 ├── nginx
 ├── php-ini
 ├── php-workers
-├── php-workspace
+├── php-7-workspace
+├── php-8-workspace
 ├── postgres
 ├── projects
 └── redis
@@ -109,6 +110,10 @@ MYSQL_5_7_PORT=4307
 # Порт, который следует использовать
 # для соединения с локального компьютера
 MONGO_PORT=27017
+
+# Настройки PHP 8.0
+# Внешний порт, доступен с локального компьютера
+PHP_8_0_PORT=9006
 
 # Настройки PHP 7.3
 # Внешний порт, доступен с локального компьютера
@@ -298,7 +303,7 @@ fastcgi_pass php-7.3:9000;
 
 Для каждой версии PHP — могут быть добавлены свои файлы с настройками. 
 
-### php-workspace
+### php-n-workspace
 
 Здесь хранится файл, в котором описаны действия, выполняемые при создании образов docker-контейнеров PHP.
 
@@ -356,7 +361,7 @@ project-2.ru
 
 ## Программы в docker-контейнерах PHP
 
-Полный перечень приложений, которые установлены в контейнерах **php-x.x** можно посмотреть в **php-workspace/Dockerfile**.
+Полный перечень приложений, которые установлены в контейнерах **php-x.x** можно посмотреть в **php-n-workspace/Dockerfile**.
 
 Здесь перечислим лишь некоторые, наиболее важные:
 
@@ -409,7 +414,7 @@ project-1.ru
 project-2.ru
 ```
 
-**project-1.ru** — будет работать на версии PHP 7.3, а **project-2.ru** - на PHP 7.1.
+**project-1.ru** — будет работать на версии PHP 7.3, **project-2.ru** - на PHP 7.1, а **project-3.ru** - на PHP 8.0.
 
 **4**. Отредактируйте настройки виртуальных хостов **Nginx**.
 
@@ -457,6 +462,7 @@ Web-проекты должны иметь возможность отправл
     extra_hosts:
       - 'project-1.localhost:IP_HOST_MACHINE'
       - 'project-2.localhost:IP_HOST_MACHINE'
+      - 'project-3.localhost:IP_HOST_MACHINE'
   ...
 ```
 
@@ -565,6 +571,7 @@ docker ps
 CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                               NAMES
 8d348959c475        docker-php-workspace_php-7.1   "docker-php-entrypoi…"   6 minuts ago        Up 54 seconds       0.0.0.0:9001->9000/tcp              php-7.1
 a93399727ff6        docker-php-workspace_php-7.3   "docker-php-entrypoi…"   6 minuts ago        Up 53 seconds       0.0.0.0:9003->9000/tcp              php-7.3
+7d879f796fdc        docker-php-workspace_php-8.0   "docker-php-entrypoi…"   6 minuts ago        Up 52 seconds
 5cd80ac95388        nginx:stable-alpine            "/docker-entrypoint.…"   6 minuts ago        Up 51 seconds       0.0.0.0:80->80/tcp                  nginx
 70182bc9e44c        mysql:5.7                      "docker-entrypoint.s…"   6 minuts ago        Up 54 seconds       33060/tcp, 0.0.0.0:4307->3306/tcp   mysql-5.7
 46f2766ec0b9        mysql:8.0.21                   "docker-entrypoint.s…"   6 minuts ago        Up 53 seconds       33060/tcp, 0.0.0.0:4308->3306/tcp   mysql-8
@@ -579,7 +586,7 @@ bba24e86778a        redis:latest                   "docker-entrypoint.s…"   6 
 
 Если для работы web-приложений необходимо установить зависимости, например через менеджер пакетов **Composer** или **NPM**, то сейчас самое время сделать это.
 
-В контейнерах **php-7.1** и **php-7.3** уже установлен и **Composer** и **NPM**.
+В контейнерах **php-7.1**, **php-7.3** и **php-8.0** уже установлен и **Composer** и **NPM**.
 
 Войдите в контейнер **php-7.1**:
 
@@ -591,6 +598,12 @@ docker exec -it php-7.1 bash
 
 ```shell script
 docker exec -it php-7.3 bash  
+```
+
+или
+
+```shell script
+docker exec -it php-8.0 bash  
 ```
 
 Перейдите в рабочий каталог необходимого web-проекта и выполните требуемые действия.
@@ -637,10 +650,10 @@ docker inspect container_name
 
 ### Как узнать какие расширения PHP установлены в контейнере php-7.3?
 
-Если контейнер **php-7.3** запущен, то выполните команду:
+Если контейнер **php-8.0** запущен, то выполните команду:
 
 ```shell script
-docker exec -it php-7.3 php -m
+docker exec -it php-8.0 php -m
 ```
 
 ### Как удалить все контейнеры?

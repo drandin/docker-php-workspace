@@ -111,9 +111,32 @@ services:
       - backend
     container_name: mongo
 
+  php-8.0:
+    build:
+      context: php-8-workspace
+      dockerfile: Dockerfile
+      args:
+        DOCKER_PHP_VERSION: '8.0'
+        TZ: ${WORKSPACE_TIMEZONE}
+    working_dir: /var/www
+    container_name: php-8.0
+    volumes:
+      - ./.ssh:/home/www-data/.ssh
+      - ./projects:/var/www
+      - ./php-ini/8.0/php.ini:/usr/local/etc/php/php.ini
+      - ./php-workers/8.0/supervisor.d:/etc/supervisor.d
+    ports:
+      - "${PHP_8_0_PORT}:9000"
+    networks:
+      - backend
+    extra_hosts:
+      - 'project-1.localhost:192.168.65.2'
+      - 'project-2.localhost:192.168.65.2'
+      - 'project-3.localhost:192.168.65.2'
+
   php-7.3:
     build:
-      context: ./php-workspace
+      context: php-7-workspace
       dockerfile: Dockerfile
       args:
         DOCKER_PHP_VERSION: '7.3'
@@ -133,10 +156,11 @@ services:
     extra_hosts:
       - 'project-1.localhost:192.168.65.2'
       - 'project-2.localhost:192.168.65.2'
+      - 'project-3.localhost:192.168.65.2'
 
   php-7.1:
     build:
-      context: ./php-workspace
+      context: php-7-workspace
       dockerfile: Dockerfile
       args:
         DOCKER_PHP_VERSION: '7.1'
@@ -156,3 +180,4 @@ services:
     extra_hosts:
       - 'project-1.localhost:192.168.65.2'
       - 'project-2.localhost:192.168.65.2'
+      - 'project-3.localhost:192.168.65.2'
