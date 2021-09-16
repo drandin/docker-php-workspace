@@ -41,9 +41,10 @@ RUN apk add --update --no-cache --virtual build-essentials \
     apk del build-essentials && rm -rf /usr/src/php*
 
 RUN apk add --no-cache $PHPIZE_DEPS
-RUN pecl install -o -f redis \
+RUN pecl install -o -f redis mongodb \
     &&  rm -rf /tmp/pear \
-    &&  docker-php-ext-enable redis
+    &&  docker-php-ext-enable redis \
+    &&  docker-php-ext-enable mongodb
 
 # Clean
 RUN rm -rf /var/cache/apk/* && docker-php-source delete
