@@ -166,6 +166,8 @@ services:
         DOCKER_PHP_VERSION: '7.1'
         DOCKER_PHP_ENABLE_XDEBUG: ${DOCKER_PHP_ENABLE_XDEBUG}
         TZ: ${WORKSPACE_TIMEZONE}
+        MONGO_VERSION: 'mongodb-1.11.1'
+        XDEBUG_VERSION: 'xdebug-2.9.8'
     working_dir: /var/www
     container_name: php-7.1
     volumes:
