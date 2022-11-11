@@ -4,6 +4,8 @@ FROM php:${DOCKER_PHP_VERSION}-fpm-alpine
 
 ARG DOCKER_PHP_ENABLE_XDEBUG='off'
 ARG TZ='UTC'
+ARG MONGO_VERSION='mongodb'
+ARG XDEBUG_VERSION='xdebug'
 
 # https://wiki.alpinelinux.org/wiki/Setting_the_timezone
 RUN echo "${TZ}" && apk --update add tzdata && \
@@ -92,7 +94,7 @@ RUN php -m && \
     docker-php-ext-enable redis && \
     apk add --update --no-cache --virtual .docker-php-mongodb-dependencies \
     heimdal-dev && \
-    pecl install mongodb && \
+    pecl install -f ${MONGO_VERSION} && \
     docker-php-ext-enable mongodb && \
     apk del .docker-php-mongodb-dependencies && \
     apk add --update --no-cache \
@@ -109,7 +111,7 @@ RUN php -m && \
 
 # Enable Xdebug
 RUN if [ "${DOCKER_PHP_ENABLE_XDEBUG}" == "on" ]; then \
-      yes | pecl install xdebug && \
+      yes | pecl install -f ${XDEBUG_VERSION} && \
       echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini && \
       echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini && \
       echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini && \
